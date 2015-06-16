@@ -1,0 +1,27 @@
+{
+  "name": "swaagger.d.ts",
+  "version": "0.0.0",
+  "description": "Swagger Interface for TypeScript",
+  "main": "swagger.d.ts",
+  "scripts": {
+    "test": "tsc test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohsen1/swagger.d.ts.git"
+  },
+  "keywords": [
+    "Swagger",
+    "API",
+    "TypeScript"
+  ],
+  "author": "Mohsen Azimi <me@azimi.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mohsen1/swagger.d.ts/issues"
+  },
+  "homepage": "https://github.com/mohsen1/swagger.d.ts#readme",
+  "devDependencies": {
+    "typescript": "^1.5.0-beta"
+  }
+}
