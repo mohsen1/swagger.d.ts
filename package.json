@@ -4,6 +4,7 @@
   "description": "Swagger Interface for TypeScript",
   "main": "swagger.d.ts",
   "scripts": {
+    "pretest": "npm install",
     "test": "tsc test.ts"
   },
   "repository": {
