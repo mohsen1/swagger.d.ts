@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/mohsen1/swagger.d.ts.svg?branch=master)](https://travis-ci.org/mohsen1/swagger.d.ts)
 
+### Note: This type interface is not covering 100% of Swagger spec yet.
+
 > Swagger Type Interface For TypeScript
 
 ### Usage
