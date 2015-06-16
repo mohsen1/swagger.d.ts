@@ -5,7 +5,7 @@
   "main": "swagger.d.ts",
   "scripts": {
     "pretest": "npm install",
-    "test": "tsc test.ts"
+    "test": "node test/make-test-ts.js; tsc test/test.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/mohsen1/swagger.d.ts#readme",
   "devDependencies": {
+    "swagger-validator": "swagger-api/swagger-spec",
     "typescript": "^1.5.0-beta"
   }
 }

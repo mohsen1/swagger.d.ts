@@ -1,4 +1,5 @@
 node_modules
-test.js
+test/test.js
+test/test.ts
 *.log
 *.DS_Store
