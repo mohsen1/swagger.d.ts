@@ -18,4 +18,4 @@ fs.readdirSync(examplesFolder)
     }
   });
 
-fs.writeFileSync('test.ts', ts);
+fs.writeFileSync(path.join(__dirname, 'test.ts'), ts);
