@@ -24,6 +24,21 @@ declare module Swagger {
     description?: string;
   }
 
+  export interface Tag {
+    name: string;
+    description?: string;
+    externalDocs?: ExternalDocs;
+  }
+
+  export interface Example {
+    // Example type interface is intentionally loose
+  }
+
+  export interface Header extends BaseSchema {
+    type: string;
+  }
+
+  // ----------------------------- Parameter -----------------------------------
   interface BaseParameter {
     name: string;
     in: string;
@@ -53,6 +68,14 @@ declare module Swagger {
     collectionFormat?: string;
   }
 
+  type Parameter =
+    BodyParameter |
+    FormDataParameter |
+    QueryParameter |
+    PathParameter |
+    HeaderParameter;
+
+  // ------------------------------- Path --------------------------------------
   export interface Path {
     $ref?: string;
     get?: Operation;
@@ -62,9 +85,10 @@ declare module Swagger {
     options?: Operation;
     head?: Operation;
     patch?: Operation;
-    parameters?: [BodyParameter|FormDataParameter|QueryParameter|PathParameter|HeaderParameter];
+    parameters?: [Parameter];
   }
 
+  // ----------------------------- Operation -----------------------------------
   export interface Operation {
     responses: { [responseName: string]: Response };
     summary?: string;
@@ -73,12 +97,21 @@ declare module Swagger {
     operationId?: string;
     produces?: [string];
     consumes?: [string];
-    parameters?: [BodyParameter|FormDataParameter|QueryParameter|PathParameter|HeaderParameter];
+    parameters?: [Parameter];
     schemes?: [string];
     deprecated?: boolean;
-    security?: [BasicAuthenticationSecurity|OAuth2AccessCodeSecurity|OAuth2ApplicationSecurity|OAuth2ImplicitSecurity|OAuth2PasswordSecurity|ApiKeySecurity]
+    security?: [Secuirty]
   }
 
+  // ----------------------------- Response ------------------------------------
+  export interface Response {
+    description: string;
+    schema?: Schema;
+    headers?: { [headerName: string]: Header };
+    examples?: { [exampleName: string]: Example };
+  }
+
+  // ------------------------------ Schema -------------------------------------
   interface BaseSchema {
     format?: string;
     title?: string;
@@ -111,7 +144,7 @@ declare module Swagger {
     readOnly?: boolean;
     xml?: XML;
     externalDocs?: ExternalDocs;
-    example?: {};
+    example?: {[exampleName: string]: Example};
     required?: [string];
   }
 
@@ -123,21 +156,7 @@ declare module Swagger {
     wrapped?: boolean;
   }
 
-  export interface Response {
-    description: string;
-    schema?: Schema;
-    headers?: { [headerName: string]: Header };
-    examples?: { [exampleName: string]: Example };
-  }
-
-  export interface Example {
-
-  }
-
-  export interface Header extends BaseSchema {
-    type: string;
-  }
-
+  // ----------------------------- Security ------------------------------------
   interface BaseSecurity {
     type: string;
     description?: string;
@@ -155,7 +174,6 @@ declare module Swagger {
   interface BaseOAuthSecuirty extends BaseSecurity {
     flow: string;
   }
-
 
   export interface OAuth2ImplicitSecurity extends BaseOAuthSecuirty {
     authorizationUrl: string;
@@ -181,14 +199,15 @@ declare module Swagger {
     [scopeName: string]: string;
   }
 
+  type Secuirty =
+    BasicAuthenticationSecurity |
+    OAuth2AccessCodeSecurity |
+    OAuth2ApplicationSecurity |
+    OAuth2ImplicitSecurity |
+    OAuth2PasswordSecurity |
+    ApiKeySecurity;
 
-  export interface Tag {
-    name: string;
-    description?: string;
-    externalDocs?: ExternalDocs;
-  }
-
-
+  // --------------------------------- Spec ------------------------------------
   export interface Spec {
     swagger: string;
     info: Info;
@@ -201,8 +220,8 @@ declare module Swagger {
     definitions?: {[definitionsName: string]: Schema }
     parameters?: {[parameterName: string]: BodyParameter|QueryParameter}
     responses?: {[responseName: string]: Response }
-    security?: [BasicAuthenticationSecurity|OAuth2AccessCodeSecurity|OAuth2ApplicationSecurity|OAuth2ImplicitSecurity|OAuth2PasswordSecurity|ApiKeySecurity]
-    securityDefinitions?: { [securityDefinitionName: string]: BasicAuthenticationSecurity|OAuth2AccessCodeSecurity|OAuth2ApplicationSecurity|OAuth2ImplicitSecurity|OAuth2PasswordSecurity|ApiKeySecurity}
+    security?: [Secuirty]
+    securityDefinitions?: { [securityDefinitionName: string]: Secuirty}
     tags?: [Tag]
   }
 }
