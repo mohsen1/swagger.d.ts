@@ -41,14 +41,15 @@ declare module Swagger {
   }
 
   export interface PathParameter extends BaseParameter {
-
+    type: string;
   }
 
   export interface HeaderParameter extends BaseParameter {
-
+    type: string;
   }
-  
+
   export interface FormDataParameter extends BaseParameter, BaseParameter {
+    type: string;
     collectionFormat?: string;
   }
 
@@ -75,7 +76,7 @@ declare module Swagger {
     parameters?: [BodyParameter|FormDataParameter|QueryParameter|PathParameter|HeaderParameter];
     schemes?: [string];
     deprecated?: boolean;
-    security?: [Secuirty]
+    security?: [BasicAuthenticationSecurity|OAuth2AccessCodeSecurity|OAuth2ApplicationSecurity|OAuth2ImplicitSecurity|OAuth2PasswordSecurity|ApiKeySecurity]
   }
 
   interface BaseSchema {
@@ -108,11 +109,19 @@ declare module Swagger {
     properties?: {[propertyName: string]: Schema};
     discriminator?: string;
     readOnly?: boolean;
-    // xml: XML; // TODO
+    xml?: XML;
     externalDocs?: ExternalDocs;
     example?: {};
     required?: [string];
-}
+  }
+
+  export interface XML {
+    type?: string;
+    namespace?: string;
+    prefix?: string;
+    attribute?: string;
+    wrapped?: boolean;
+  }
 
   export interface Response {
     description: string;
@@ -129,20 +138,49 @@ declare module Swagger {
     type: string;
   }
 
-  export interface Secuirty {
-
+  interface BaseSecurity {
+    type: string;
+    description?: string;
   }
 
-  export interface SecurityDefinition {
-
+  export interface BasicAuthenticationSecurity extends BaseSecurity {
+    // It's the exact same interface as BaseSecurity
   }
 
-  export interface BasicAuthenticationSecurity {}
-  export interface ApiKeySecurity {}
-  export interface Oauth2ImplicitSecurity {}
-  export interface Oauth2PasswordSecurity {}
-  export interface Oauth2ApplicationSecurity {}
-  export interface Oauth2AccessCodeSecurity {}
+  export interface ApiKeySecurity extends BaseSecurity {
+    name: string;
+    in: string;
+  }
+
+  interface BaseOAuthSecuirty extends BaseSecurity {
+    flow: string;
+  }
+
+
+  export interface OAuth2ImplicitSecurity extends BaseOAuthSecuirty {
+    authorizationUrl: string;
+  }
+
+  export interface OAuth2PasswordSecurity extends BaseOAuthSecuirty {
+    tokenUrl: string;
+    scopes?: [OAuthScope];
+  }
+
+  export interface OAuth2ApplicationSecurity extends BaseOAuthSecuirty {
+    tokenUrl: string;
+    scopes?: [OAuthScope];
+  }
+
+  export interface OAuth2AccessCodeSecurity extends BaseOAuthSecuirty {
+    tokenUrl: string;
+    authorizationUrl: string;
+    scopes?: [OAuthScope];
+  }
+
+  export interface OAuthScope {
+    [scopeName: string]: string;
+  }
+
 
   export interface Tag {
     name: string;
@@ -163,8 +201,8 @@ declare module Swagger {
     definitions?: {[definitionsName: string]: Schema }
     parameters?: {[parameterName: string]: BodyParameter|QueryParameter}
     responses?: {[responseName: string]: Response }
-    security?: [Secuirty]
-    securityDefinitions?: { [securityDefinitionName: string]: SecurityDefinition}
+    security?: [BasicAuthenticationSecurity|OAuth2AccessCodeSecurity|OAuth2ApplicationSecurity|OAuth2ImplicitSecurity|OAuth2PasswordSecurity|ApiKeySecurity]
+    securityDefinitions?: { [securityDefinitionName: string]: BasicAuthenticationSecurity|OAuth2AccessCodeSecurity|OAuth2ApplicationSecurity|OAuth2ImplicitSecurity|OAuth2PasswordSecurity|ApiKeySecurity}
     tags?: [Tag]
   }
 }
