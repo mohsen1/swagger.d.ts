@@ -1,6 +1,6 @@
 {
   "name": "swaagger.d.ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Swagger Interface for TypeScript",
   "main": "swagger.d.ts",
   "scripts": {
