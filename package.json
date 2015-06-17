@@ -1,5 +1,5 @@
 {
-  "name": "swaagger.d.ts",
+  "name": "swagger.d.ts",
   "version": "0.0.1",
   "description": "Swagger Interface for TypeScript",
   "main": "swagger.d.ts",
