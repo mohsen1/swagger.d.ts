@@ -64,7 +64,7 @@ declare module Swagger {
     type: string;
   }
 
-  export interface FormDataParameter extends BaseParameter, BaseParameter {
+  export interface FormDataParameter extends BaseParameter, BaseSchema {
     type: string;
     collectionFormat?: string;
   }
