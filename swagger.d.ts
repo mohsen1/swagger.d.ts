@@ -57,6 +57,7 @@ declare module Swagger {
 
   export interface PathParameter extends BaseParameter {
     type: string;
+    required: boolean;
   }
 
   export interface HeaderParameter extends BaseParameter {
