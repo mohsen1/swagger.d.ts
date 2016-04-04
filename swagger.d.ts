@@ -100,7 +100,8 @@ declare module Swagger {
     parameters?: [Parameter];
     schemes?: [string];
     deprecated?: boolean;
-    security?: [Secuirty]
+    security?: [Secuirty];
+    tags?:[string];
   }
 
   // ----------------------------- Response ------------------------------------
