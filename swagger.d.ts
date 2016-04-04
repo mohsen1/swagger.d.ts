@@ -4,6 +4,7 @@ declare module Swagger {
     title: string;
     version: string;
     description?: string;
+    termsOfService?: string;
     contact?: Contact;
     license?: License;
   }
@@ -213,6 +214,7 @@ declare module Swagger {
   export interface Spec {
     swagger: string;
     info: Info;
+    externalDocs?: ExternalDocs;
     host?: string;
     basePath?: string;
     schemes?: [string];

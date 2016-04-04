@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var examplesFolder = '../node_modules/swagger-validator/examples/v2.0/json/';
+var examplesFolder = './examples';
 examplesFolder = path.join(__dirname, examplesFolder);
 
 var ts = '/// <reference path="../swagger.d.ts"/>\n\n';
