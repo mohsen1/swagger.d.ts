@@ -6,25 +6,26 @@
 
 ### Usage
 
-###### Installation
+#### Installation
 
 Install with npm
 
 ```shell
-npm install --save swagger.d.ts
+npm install --save @types/swagger-schema-official
 ```
-
-Include the `reference` comment then use `Swagger.Spec` type. Other sub-types are also available.
+And use the module `'swagger-schema-official'`
 
 ```typescript
-/// <reference path="path/to/swagger.d.ts"/>
+import * as Swagger from 'swagger-schema-official';
 
 var mySwaggerSpec: Swagger.Spec = { /*... */ };
 ```
 
 ### Development
 
-###### Running tests
+This module is moved to [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/swagger-schema-official). Add your bug fixes and improvements there.
+
+#### Running tests
 
 Install Node.js and run:
 ```
